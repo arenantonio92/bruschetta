@@ -1,0 +1,36 @@
+{
+  "engines": {
+    "composer": "^0.19.4"
+  },
+  "name": "evoo_bc",
+  "version": "0.1.0",
+  "description": "A blockchain solution for Extra Virgin Olive Oil (EVOO) traceability and certification",
+  "scripts": {
+    "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/evoo_bc.bna",
+    "pretest": "npm run lint",
+    "lint": "eslint .",
+    "test": "nyc mocha -t 0 test/*.js && cucumber-js"
+  },
+  "keywords": [
+    "composer",
+    "composer-network"
+  ],
+  "author": "alessio",
+  "email": "alessiobianchini.it@gmail.com",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "chai": "latest",
+    "chai-as-promised": "latest",
+    "composer-admin": "^0.20.0",
+    "composer-cli": "^0.20.0",
+    "composer-client": "^0.20.0",
+    "composer-common": "^0.20.0",
+    "composer-connector-embedded": "^0.20.0",
+    "composer-cucumber-steps": "^0.20.0",
+    "cucumber": "^2.2.0",
+    "eslint": "latest",
+    "mkdirp": "latest",
+    "mocha": "latest",
+    "nyc": "latest"
+  }
+}

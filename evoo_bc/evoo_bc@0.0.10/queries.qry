@@ -1,0 +1,69 @@
+query BatchInformations {
+  description: "Returns batch informations"
+  statement: 
+      SELECT org.bn.evoo.Batch
+        WHERE (batchId == _$batchId)
+}
+
+query ProductInformations {
+  description: "Returns product informations"
+  statement: 
+      SELECT org.bn.evoo.Product
+        WHERE (productId == _$productId)
+}
+
+query OFP_OHP {
+  description: "Returns olive farming and harvesting profile for a defined product"
+  statement:
+      SELECT org.bn.evoo.FarmingProcessSensing
+        WHERE (farming == _$farming)
+}
+
+query getProductionProcess {
+  description: "Returns production process for a given batch"
+  statement:
+      SELECT org.bn.evoo.ProductionProcess
+        WHERE (batch == _$batch)
+}
+
+query OOPP {
+  description: "Returns olive oil production profile for a defined product"
+  statement:
+      SELECT org.bn.evoo.ProductionProcessSensing
+        WHERE (process == _$process)
+}
+
+query OOCP {
+  description: "Returns olive oil conservation profile for a defined product"
+  statement:
+      SELECT org.bn.evoo.BasementSensing
+        WHERE ((basement == _$basement) AND (sensingTimestamp >= _$initialTime) AND (sensingTimestamp < _$finalTime))
+}
+
+query getBatchShipment {
+  description: "Returns batch shipment"
+  statement:
+      SELECT org.bn.evoo.BatchShipment
+        WHERE (batches CONTAINS _$batch)
+}
+
+query OOTP_Batch {
+  description: "Returns batch transportation profile"
+  statement:
+      SELECT org.bn.evoo.BatchShipmentSensing
+        WHERE (shipment == _$shipment)
+}
+
+query getProductShipment {
+  description: "Returns product shipment"
+  statement:
+      SELECT org.bn.evoo.ProductShipment
+        WHERE (products CONTAINS _$product)
+}
+
+query OOTP_Product {
+  description: "Returns product transportation profile"
+  statement:
+      SELECT org.bn.evoo.ProductShipmentSensing
+        WHERE (shipment == _$shipment)
+}

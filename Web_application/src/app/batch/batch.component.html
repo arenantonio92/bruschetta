@@ -1,0 +1,99 @@
+<section *ngIf="!query">
+    <div class="login-page">
+      <div class="form">
+        <form class="login-form" form (ngSubmit)="onBatchQuery()" #batchForm="ngForm">
+          <!--<form (ngSubmit)="onSignUp()" #signupForm="ngForm"></form>-->
+          <input type="text" [(ngModel)]="batchId" #firstName="ngModel" name="batchId" placeholder="Batch identifier"/>
+          <button>GET INFORMATIONS</button>
+          <p class="message">You need to type the identifier placed over the batch.<a href="#"></a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section *ngIf="onSearching">
+      <h2>RETRIEVING INFORMATIONS....</h2>
+  </section>
+  <section *ngIf="noData">
+      <h2>NO RESULTS: TRY AGAIN.</h2>
+  </section>
+  <section *ngIf="query">
+      <!-- CONTENT -->
+  <div class="wrapper row2">
+      <div id="container" class="clear">
+        <section id="slider"><a href="#"><img src="images/demo/960x360.gif" alt=""></a></section>
+        <!-- CONTENT BODY -->
+        <aside id="left_column">
+          <h2 class="title">Batch informations:</h2>
+          <!-- MENU -->
+          <nav>
+              <ul>
+                  <section *ngIf="!farming">
+                      <li><form class="login-form" form (ngSubmit)="onFarmingData()" #farmData="ngForm"><b>Farming and harvesting data</b><div class="box"><button class="btn1">Show</button></div></form></li>
+                  </section>
+                  <section *ngIf="farming">
+                      <li><form class="login-form" form (ngSubmit)="onFarmingData()" #farmData="ngForm"><b>Farming and harvesting data</b><div class="box"><button class="btn1">Hide</button></div></form></li>
+                  </section>
+                  <section *ngIf="!transportation">
+                      <li><form class="login-form" form (ngSubmit)="onTransportationData()" #trasportationData="ngForm"><b>Transportation data</b><div class="box"><button class="btn1">Show</button></div></form></li>
+                  </section>
+                  <section *ngIf="transportation">
+                      <li><form class="login-form" form (ngSubmit)="onTransportationData()" #trasportationData="ngForm"><b>Transportation data</b><div class="box"><button class="btn1">Hide</button></div></form></li>
+                  </section>
+              </ul>
+            </nav>
+          <!-- /MENU -->
+        </aside>
+        <!-- main content -->
+        <div id="content">
+            <section *ngIf="farming">
+                <article>
+                    <h2>FARMING AND HARVESTING DATA:</h2> 
+              
+                            <div class="table">
+                              <div class="table-header">
+                                <div class="header__item">MEASURE TYPE</div>
+                                <div class="header__item">VALUE</div>
+                                <div class="header__item">TIME</div>
+                                <div class="header__item">INFO</div>
+                              </div>
+                              <div class="table-content">	
+                                  <div *ngFor="let sens of farmSens" class="table-row">
+                                      <div class="table-data">{{sens.measureType}}</div>
+                                      <div class="table-data">{{sens.value}}</div>
+                                      <div class="table-data">{{sens.sensingTimestamp}}</div>
+                                      <div class="table-data"><p style="color: crimson">{{sens.alarm}}</p></div>
+                                  </div>
+                              </div>	
+                            </div>
+                </article>
+            </section>
+
+
+            <section *ngIf="transportation">
+                <article>
+                    <h2>TRANSPORTATION DATA:</h2> 
+              
+                            <div class="table">
+                              <div class="table-header">
+                                <div class="header__item">MEASURE TYPE</div>
+                                <div class="header__item">VALUE</div>
+                                <div class="header__item">TIME</div>
+                                <div class="header__item">INFO</div>
+                              </div>
+                              <div class="table-content">	
+                                  <div *ngFor="let sens of transpSens" class="table-row">
+                                      <div class="table-data">{{sens.measureType}}</div>
+                                      <div class="table-data">{{sens.value}}</div>
+                                      <div class="table-data">{{sens.sensingTimestamp}}</div>
+                                      <div class="table-data"><p style="color: crimson">{{sens.alarm}}</p></div>
+                                  </div>
+                              </div>	
+                            </div>
+              
+                </article>
+            </section>
+        </div>
+        <!-- /CONTENT BODY-->
+      </div>
+    </div>
+    </section>

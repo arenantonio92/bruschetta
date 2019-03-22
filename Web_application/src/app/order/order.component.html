@@ -1,0 +1,112 @@
+<!-- content -->
+<div class="wrapper row2">
+  <div id="container" class="clear">
+    <section id="slider"><a href="#"><img src="images/demo/960x360.gif" alt=""></a></section>
+    <!-- content body -->
+    <aside id="left_column">
+      <h2 class="title">Your assets:</h2>
+      <!-- FARMER MENU -->
+      <section *ngIf="farmer">
+          <nav>
+              <ul>
+                <li><a href="#">Plantations</a></li>
+                <li><a href="#">Farming processes</a></li>
+                <li><a href="#">Harvesting processes</a></li>
+                <li class="last"><a routerLink="/myBatch">My batches</a></li>
+              </ul>
+            </nav>
+      </section>
+      <!-- MAKER MENU -->
+      <section *ngIf="maker">
+          <nav>
+              <ul>
+                  <li><a routerLink="/basement">Basements</a></li>
+                  <li><a routerLink="/productionProcess">Production processes</a></li>
+                  <li><a routerLink="/myBatch">My batches</a></li>
+                  <li class="last"><a routerLink="/myProduct">My products</a></li>
+                </ul>
+            </nav>
+      </section>
+      <!-- COURIER MENU -->
+      <section *ngIf="courier">
+          <nav>
+              <ul>
+                <li><a href="#">Batches shipments</a></li>
+                <li><a href="#">Products shipment</a></li>
+                <li><a routerLink="/myBatch">My batches</a></li>
+                <li class="last"><a routerLink="/myProduct">My products</a></li>
+              </ul>
+            </nav>
+      </section>
+      <!-- SELLER MENU -->
+      <section *ngIf="seller">
+          <nav>
+              <ul>
+                <li><a routerLink="/shop">Shops</a></li>
+                <li><a routerLink="/order">Orders</a></li>
+                <li class="last"><a routerLink="/myProduct">My products</a></li>
+              </ul>
+            </nav>
+      </section>
+      <h2 class="title">Your informations:</h2>
+      <section class="last">
+        <address style="font-size: medium; text-decoration-color: black">
+        ID: {{id}}<br>
+        Full Name: {{name}} {{surname}}<br>
+        Address: {{address}}<br>
+        <br>
+        <br>
+        Tel: {{telephone}}<br>
+        Email: <a href="#">{{email}}</a>
+        </address>
+      </section>
+      <!-- /section -->
+    </aside>
+    <!-- main content -->
+    <div id="content">
+      <article>
+        <h2>MY ORDERS:</h2>
+        <p></p>
+
+            <div class="table">
+              <div class="table-header">
+                <div class="header__item">ORDER ID</div>
+                <div class="header__item">QUANTITY</div>
+                <div class="header__item">DATE</div>
+                <div class="header__item">SHOP ID</div>
+              </div>
+
+              <div *ngFor="let order of orders" class="table-row">		
+                  <div class="table-data">{{order.orderId}}</div>
+                  <div class="table-data">{{order.quantity}}</div>
+                  <div class="table-data">{{order.date}}</div>
+                  <div class="table-data">{{order.shop}}</div>
+              </div>
+            </div>
+            
+      </article>
+
+
+      <article  align="center">
+        <section *ngIf="!createNew"> 
+            <form class="login-form" form (ngSubmit)="onCreateNew()" #createForm="ngForm">
+                <div class="box"><button class="btn1">CREATE NEW</button></div>
+            </form>
+        </section>
+        <section *ngIf="createNew">
+            <div class="login-page">
+                <div class="form">
+                  <form class="login-form" form (ngSubmit)="createNewOrder()" #batchForm="ngForm">
+                      <input type="text" [(ngModel)]="quantity" #firstName="ngModel" name="quantity" placeholder="Quantity"/>
+                      <input type="text" [(ngModel)]="shop" #firstName="ngModel" name="shop" placeholder="Shop identifier"/>
+                      <button>ADD ORDER</button>
+                  </form>
+                </div>
+              </div>
+        </section>   
+      </article>
+
+    </div>
+    <!-- / content body -->
+  </div>
+</div>

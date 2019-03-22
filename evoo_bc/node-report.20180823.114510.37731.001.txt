@@ -1,0 +1,210 @@
+================================================================================
+==== Node Report ===============================================================
+
+Event: exception, location: "OnUncaughtException"
+Filename: node-report.20180823.114510.37731.001.txt
+Dump event time:  2018/08/23 11:45:10
+Module load time: 2018/08/23 11:41:29
+Process ID: 37731
+Command line: node /Users/alessio/.nvm/versions/node/v8.11.1/bin/composer network install --card PeerAdmin@hlfv1 --archiveFile evoo_bc@0.0.1.bna
+
+Node.js version: v8.11.1
+(http_parser: 2.8.0, v8: 6.2.414.50, uv: 1.19.1, zlib: 1.2.11, ares: 1.10.1-DEV,
+ modules: 57, nghttp2: 1.25.0, openssl: 1.0.2o, icu: 60.1, unicode: 10.0,
+ cldr: 32.0, tz: 2017c)
+
+node-report version: 2.2.1 (built against Node.js v8.11.1, 64 bit)
+
+OS version: Darwin 17.7.0 Darwin Kernel Version 17.7.0: Thu Jun 21 22:53:14 PDT 2018; root:xnu-4570.71.2~1/RELEASE_X86_64
+
+Machine: Alessios-MacBook-Air.local x86_64
+
+================================================================================
+==== JavaScript Stack Trace ====================================================
+
+WriteStream.emit (events.js:1:1)
+onwriteError (_stream_writable.js:1:1)
+onwrite (_stream_writable.js:1:1)
+_destroy (internal/streams/destroy.js:1:1)
+WriteStream.stderr._destroy (internal/process/stdio.js:1:1)
+WriteStream.destroy (internal/streams/destroy.js:1:1)
+WriteWrap.afterWrite [as oncomplete] (net.js:1:1)
+
+================================================================================
+==== Native Stack Trace ========================================================
+
+ 0: [pc=0x1025eb397] nodereport::OnUncaughtException(v8::Isolate*) [/Users/alessio/.nvm/versions/node/v8.11.1/lib/node_modules/composer-cli/node_modules/node-report/api.node]
+ 1: [pc=0x10062d163] v8::internal::Isolate::Throw(v8::internal::Object*, v8::internal::MessageLocation*) [/Users/alessio/.nvm/versions/node/v8.11.1/bin/node]
+ 2: [pc=0x1007d427b] v8::internal::Runtime_Throw(int, v8::internal::Object**, v8::internal::Isolate*) [/Users/alessio/.nvm/versions/node/v8.11.1/bin/node]
+ 3: [pc=0x68ea75842fd] 
+
+================================================================================
+==== JavaScript Heap and Garbage Collector =====================================
+
+Heap space name: new_space
+    Memory size: 1,048,576 bytes, committed memory: 800,056 bytes
+    Capacity: 1,031,168 bytes, used: 782,736 bytes, available: 248,432 bytes
+Heap space name: old_space
+    Memory size: 50,655,232 bytes, committed memory: 50,180,752 bytes
+    Capacity: 44,974,064 bytes, used: 41,878,424 bytes, available: 3,095,640 bytes
+Heap space name: code_space
+    Memory size: 2,097,152 bytes, committed memory: 1,784,960 bytes
+    Capacity: 1,896,096 bytes, used: 1,699,936 bytes, available: 196,160 bytes
+Heap space name: map_space
+    Memory size: 4,739,072 bytes, committed memory: 4,426,848 bytes
+    Capacity: 4,651,328 bytes, used: 1,746,624 bytes, available: 2,904,704 bytes
+Heap space name: large_object_space
+    Memory size: 4,030,464 bytes, committed memory: 4,030,464 bytes
+    Capacity: 1,440,847,992 bytes, used: 3,963,512 bytes, available: 1,436,884,480 bytes
+
+Total heap memory size: 62,570,496 bytes
+Total heap committed memory: 61,223,080 bytes
+Total used heap memory: 50,071,232 bytes
+Total available heap memory: 1,443,329,416 bytes
+
+Heap memory limit: 1,501,560,832
+
+================================================================================
+==== Resource Usage ============================================================
+
+Process total resource usage:
+  User mode CPU: 2.676337 secs
+  Kernel mode CPU: 0.382138 secs
+  Average CPU Consumption : 1.38393%
+  Maximum resident set size: 126,168,858,624 bytes
+  Page faults: 48 (I/O required) 46763 (no I/O required)
+  Filesystem activity: 0 reads 0 writes
+
+================================================================================
+==== Node.js libuv Handle Summary ==============================================
+
+(Flags: R=Ref, A=Active)
+Flags  Type      Address             Details
+[-A]   async     0x0000000102307030  
+[--]   check     0x00007ffeefbfe960  
+[R-]   idle      0x00007ffeefbfe9d8  
+[--]   prepare   0x00007ffeefbfea50  
+[--]   check     0x00007ffeefbfeac8  
+[-A]   async     0x000000010156d290  
+[R-]   timer     0x00000001022045e0  repeat: 0, timeout expired: 198324805 ms ago
+[R-]   tty       0x0000000102202638  , file descriptor: 10, write queue size: 0, writable
+[-A]   signal    0x0000000102318370  signum: 28 (SIGWINCH)
+[R-]   tty       0x00000001023184c8  , file descriptor: 12, write queue size: 0, writable
+[-A]   async     0x00000001025f2f78  
+[-A]   signal    0x0000000102401130  signum: 6 (SIGABRT)
+[-A]   signal    0x0000000102400750  signum: 14 (SIGALRM)
+[-A]   signal    0x0000000102401720  signum: 1 (SIGHUP)
+[-A]   signal    0x0000000102401810  signum: 2 (SIGINT)
+[-A]   signal    0x0000000102401900  signum: 15 (SIGTERM)
+[-A]   signal    0x00000001024019f0  signum: 26 (SIGVTALRM)
+[-A]   signal    0x0000000102401ae0  signum: 24 (SIGXCPU)
+[-A]   signal    0x0000000102401cf0  signum: 25 (SIGXFSZ)
+[-A]   signal    0x0000000102401de0  signum: 31 (SIGUSR2)
+[-A]   signal    0x0000000102401ed0  signum: 5 (SIGTRAP)
+[-A]   signal    0x0000000102401fc0  signum: 12 (SIGSYS)
+[-A]   signal    0x00000001024020b0  signum: 3 (SIGQUIT)
+[-A]   signal    0x00000001024021a0  signum: 6 (SIGABRT)
+[RA]   timer     0x0000000102402290  repeat: 0, timeout in: 80 ms
+[--]   timer     0x0000000102332940  repeat: 0, timeout expired: 212767 ms ago
+[R-]   timer     0x00000001024044d0  repeat: 0, timeout expired: 219556 ms ago
+[-A]   async     0x0000000105048ed8  
+[R-]   timer     0x0000000102345bb0  repeat: 0, timeout expired: 198324805 ms ago
+[R-]   prepare   0x0000000105048e08  
+[R-]   timer     0x0000000102605e10  repeat: 0, timeout in: 12666863386545710 ms
+[--]   timer     0x0000000102605eb0  repeat: 0, timeout expired: 215746 ms ago
+[RA]   timer     0x0000000102344130  repeat: 0, timeout in: 100 ms
+[--]   timer     0x000000010260b320  repeat: 0, timeout expired: 218557 ms ago
+[-A]   async     0x0000000102337b70  
+[-A]   async     0x000000010220fc30  
+[-A]   timer     0x0000000102402980  repeat: 0, timeout in: 5000 ms
+
+================================================================================
+==== System Information ========================================================
+
+Environment variables
+  TERM_PROGRAM=Apple_Terminal
+  NVM_CD_FLAGS=
+  SHELL=/bin/bash
+  TERM=xterm-256color
+  TMPDIR=/var/folders/g2/r3mrkxsd1wg8svcbq_7zbj480000gn/T/
+  Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.aFJpusfcyM/Render
+  TERM_PROGRAM_VERSION=404
+  TERM_SESSION_ID=EA52F092-F6CF-4D49-A9B9-BCA6539B2161
+  USER=alessio
+  NVM_DIR=/Users/alessio/.nvm
+  SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.BcAjHcx3gH/Listeners
+  PATH=/Users/alessio/Documents/omnetpp-5.4.1/bin:/Users/alessio/Documents/omnetpp-5.4.1/tools/macosx/bin:/Users/alessio/.nvm/versions/node/v8.11.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/Documents/omnetpp-5.4.1/bin:$HOME/omnetpp-5.4.1/tools/macosx/bin:/Applications/VMware Fusion.app/Contents/Public:/Library/TeX/texbin:/Users/alessio/Documents/go/bin:/Users/alessio/Documents/binaries/bin
+  _=/Users/alessio/.nvm/versions/node/v8.11.1/bin/composer
+  PWD=/Users/alessio/Desktop/evoo_bc
+  XPC_FLAGS=0x0
+  XPC_SERVICE_NAME=0
+  SHLVL=2
+  HOME=/Users/alessio
+  COMPOSER_ROOT=/Users/alessio/Documents/HyperledgerComposer
+  LOGNAME=alessio
+  LC_CTYPE=UTF-8
+  GOPATH=/Users/alessio/Documents/go
+  NVM_BIN=/Users/alessio/.nvm/versions/node/v8.11.1/bin
+  QT_PLUGIN_PATH=/Users/alessio/Documents/omnetpp-5.4.1/tools/macosx/plugins
+
+Resource limits                        soft limit      hard limit
+  core file size (blocks)                       0       unlimited
+  data seg size (kbytes)                unlimited       unlimited
+  file size (blocks)                    unlimited       unlimited
+  max locked memory (bytes)             unlimited       unlimited
+  max memory size (kbytes)              unlimited       unlimited
+  open files                                10240       unlimited
+  stack size (bytes)                      8388608        67104768
+  cpu time (seconds)                    unlimited       unlimited
+  max user processes                          709            1064
+  virtual memory (kbytes)               unlimited       unlimited
+
+Loaded libraries
+  /Users/alessio/.nvm/versions/node/v8.11.1/bin/node
+  /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+  /usr/lib/libSystem.B.dylib
+  /usr/lib/libc++.1.dylib
+  /usr/lib/libDiagnosticMessagesClient.dylib
+  /usr/lib/libicucore.A.dylib
+  /usr/lib/libobjc.A.dylib
+  /usr/lib/libz.1.dylib
+  /usr/lib/system/libcache.dylib
+  /usr/lib/system/libcommonCrypto.dylib
+  /usr/lib/system/libcompiler_rt.dylib
+  /usr/lib/system/libcopyfile.dylib
+  /usr/lib/system/libcorecrypto.dylib
+  /usr/lib/system/libdispatch.dylib
+  /usr/lib/system/libdyld.dylib
+  /usr/lib/system/libkeymgr.dylib
+  /usr/lib/system/liblaunch.dylib
+  /usr/lib/system/libmacho.dylib
+  /usr/lib/system/libquarantine.dylib
+  /usr/lib/system/libremovefile.dylib
+  /usr/lib/system/libsystem_asl.dylib
+  /usr/lib/system/libsystem_blocks.dylib
+  /usr/lib/system/libsystem_c.dylib
+  /usr/lib/system/libsystem_configuration.dylib
+  /usr/lib/system/libsystem_coreservices.dylib
+  /usr/lib/system/libsystem_darwin.dylib
+  /usr/lib/system/libsystem_dnssd.dylib
+  /usr/lib/system/libsystem_info.dylib
+  /usr/lib/system/libsystem_m.dylib
+  /usr/lib/system/libsystem_malloc.dylib
+  /usr/lib/system/libsystem_network.dylib
+  /usr/lib/system/libsystem_networkextension.dylib
+  /usr/lib/system/libsystem_notify.dylib
+  /usr/lib/system/libsystem_sandbox.dylib
+  /usr/lib/system/libsystem_secinit.dylib
+  /usr/lib/system/libsystem_kernel.dylib
+  /usr/lib/system/libsystem_platform.dylib
+  /usr/lib/system/libsystem_pthread.dylib
+  /usr/lib/system/libsystem_symptoms.dylib
+  /usr/lib/system/libsystem_trace.dylib
+  /usr/lib/system/libunwind.dylib
+  /usr/lib/system/libxpc.dylib
+  /usr/lib/closure/libclosured.dylib
+  /usr/lib/libc++abi.dylib
+  /Users/alessio/.nvm/versions/node/v8.11.1/lib/node_modules/composer-cli/node_modules/node-report/api.node
+  /Users/alessio/.nvm/versions/node/v8.11.1/lib/node_modules/composer-cli/node_modules/grpc/src/node/extension_binary/node-v57-darwin-x64-unknown/grpc_node.node
+
+================================================================================

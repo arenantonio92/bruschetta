@@ -1,0 +1,356 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+namespace org.bn.evoo
+
+/** ------------------------------------------------------------------------------------------------------------------------------------
+  PARTICIPANTS DEFINITION:
+ ------------------------------------------------------------------------------------------------------------------------------------*/
+
+participant Owner identified by ownerId {
+  o String ownerId
+  o String firstName
+  o String lastName
+  o String telephone
+  o String address
+  o String email
+  o OwnerType ownerType
+}
+
+enum OwnerType {
+  o FARMER
+  o MAKER
+  o COURIER
+  o SELLER
+}
+
+/** ------------------------------------------------------------------------------------------------------------------------------------
+  ASSETS DEFINITION:
+ ------------------------------------------------------------------------------------------------------------------------------------*/
+
+asset Plantation identified by plantationId {
+  o String plantationId
+  --> Owner farmer
+  o String latitude
+  o String longitude
+}
+
+asset ProductionProcess identified by productionProcessId {
+  o String productionProcessId
+  --> Owner maker
+  --> Batch batch
+  o DateTime begin
+  o DateTime end
+}
+
+asset Basement identified by basementId {
+  o String basementId
+  --> Owner maker
+  o String latitude
+  o String longitude
+}
+
+asset FarmingProcess identified by farmingProcId {
+  o String farmingProcId
+  --> Plantation plantation
+  o Integer year
+  o DateTime harvBegin
+  o DateTime harvEnd
+  o HarvMethod harvMethod
+}
+
+enum HarvMethod {
+  o BY_HAND
+  o MACHINE
+  o UNDEFINED
+}
+
+asset BatchShipment identified by shipmentId {
+  o String shipmentId
+  --> Owner courier
+  --> Batch[] batches
+  o DateTime begin
+  o DateTime end
+}
+
+asset ProductShipment identified by shipmentId {
+  o String shipmentId
+  --> Owner courier
+  --> Product[] products
+  --> Order order
+  o DateTime begin
+  o DateTime end
+}
+
+asset Batch identified by batchId {
+  o String batchId
+  --> FarmingProcess farming
+  --> Owner ownership
+  o DateTime creationDate
+  o Double weight
+}
+
+asset Product identified by productId {
+  o String productId
+  --> Batch batch
+  --> Owner ownership
+  --> Basement basement
+  o DateTime creationDate
+}
+
+asset Shop identified by shopId {
+  o String shopId
+  o String latitude
+  o String longitude
+  o String name
+  --> Owner seller
+}
+
+asset Order identified by orderId {
+  o String orderId
+  o Integer quantity
+  o DateTime date
+  --> Shop shop
+}
+
+/** ------------------------------------------------------------------------------------------------------------------------------------
+  SENSING ASSETS DEFINITION:
+ ------------------------------------------------------------------------------------------------------------------------------------*/
+
+asset ProductionProcessSensing identified by sensingId {
+  o String sensingId
+  --> ProductionProcess process
+  o MeasureTypeProductionProcess measureType
+  o ProcessType processType
+  o Double value
+  o String sensorIdentifier
+  o DateTime sensingTimestamp
+}
+
+enum MeasureTypeProductionProcess {
+  o TEMPERATURE
+  o HUMIDITY
+}
+
+enum ProcessType {
+  o DELEAFING
+  o WASHING
+  o CRUSHING
+  o MALAXING
+  o DECANTING
+}
+
+asset BasementSensing identified by sensingId {
+  o String sensingId
+  --> Basement basement
+  o MeasureTypeBasement measureType
+  o Double value
+  o String sensorIdentifier
+  o DateTime sensingTimestamp
+}
+
+enum MeasureTypeBasement {
+  o TEMPERATURE
+  o HUMIDITY
+}
+
+asset FarmingProcessSensing identified by sensingId {
+  o String sensingId
+  --> FarmingProcess farming
+  o MeasureTypeFarmingProcess measureType
+  o Double value
+  o String sensorIdentifier
+  o DateTime sensingTimestamp
+}
+
+enum MeasureTypeFarmingProcess {
+  o TEMPERATURE
+  o HUMIDITY
+  o PEROXIDE
+  o CO2
+  o LIGHT_INTENSITY
+}
+
+asset BatchShipmentSensing identified by sensingId {
+  o String sensingId
+  --> BatchShipment shipment
+  o MeasureTypeShipment measureType
+  o Double value
+  o String sensorIdentifier
+  o DateTime sensingTimestamp
+}
+
+asset ProductShipmentSensing identified by sensingId {
+  o String sensingId
+  --> ProductShipment shipment
+  o MeasureTypeShipment measureType
+  o Double value
+  o String sensorIdentifier
+  o DateTime sensingTimestamp
+}
+
+enum MeasureTypeShipment {
+  o TEMPERATURE
+  o HUMIDITY
+}
+
+/** ------------------------------------------------------------------------------------------------------------------------------------
+  TRANSACTIONS DEFINITION:
+ ------------------------------------------------------------------------------------------------------------------------------------*/
+
+transaction newPlantation {
+  o String plantationId
+  o String latitude
+  o String longitude
+}
+
+transaction newShop {
+  o String shopId
+  o String latitude
+  o String longitude
+  o String name
+}
+
+transaction newOrder {
+  o String orderId
+  o Integer quantity
+  --> Shop shop
+}
+
+transaction newFarmingProcess {
+  o String farmingProcId
+  --> Plantation plantation
+  o Integer year
+}
+
+transaction startHarvestingProcess {
+  --> FarmingProcess farming
+  o DateTime begin
+  o HarvMethod harvMethod
+}
+
+transaction endHarvestingProcess {
+  --> FarmingProcess farming
+  o DateTime end
+}
+
+transaction newBatch {
+  o String batchId
+  --> FarmingProcess farming
+  o DateTime creationDate
+  o Double weight
+}
+
+transaction newProductionProcess {
+  o String productionProcessId
+  --> Batch batch
+  o DateTime begin
+}
+
+transaction newBatchShipment {
+  o String shipmentId
+  --> Batch[] batches
+  o DateTime begin
+}
+
+transaction newProductShipment {
+  o String shipmentId
+  --> Product[] products
+  --> Order order
+  o DateTime begin
+}
+
+transaction newBasement {
+  o String basementId
+  o String latitude
+  o String longitude
+}
+
+transaction newProduct {
+  o String productId
+  --> Batch batch
+  --> Basement basement
+  o DateTime creationDate
+}
+
+transaction newProductionProcessSensing {
+  o String sensingId
+  --> ProductionProcess process
+  o MeasureTypeProductionProcess measureType
+  o ProcessType processType
+  o Double value
+  o String sensorIdentifier
+  o DateTime sensingTimestamp
+}
+
+transaction newFarmingProcessSensing {
+  o String sensingId
+  --> FarmingProcess farming
+  o MeasureTypeFarmingProcess measureType
+  o Double value
+  o String sensorIdentifier
+  o DateTime sensingTimestamp
+}
+
+transaction newBatchShipmentSensing {
+  o String sensingId
+  --> BatchShipment shipment
+  o MeasureTypeShipment measureType
+  o Double value
+  o String sensorIdentifier
+  o DateTime sensingTimestamp
+}
+
+transaction newProductShipmentSensing {
+  o String sensingId
+  --> ProductShipment shipment
+  o MeasureTypeShipment measureType
+  o Double value
+  o String sensorIdentifier
+  o DateTime sensingTimestamp
+}
+
+transaction newBasementSensing {
+  o String sensingId
+  --> Basement basement
+  o MeasureTypeBasement measureType
+  o Double value
+  o String sensorIdentifier
+  o DateTime sensingTimestamp
+}
+
+transaction changeBatchOwnership {
+  --> Owner newOwner
+  --> Batch batch
+}
+
+transaction changeProductOwnership {
+  --> Owner newOwner
+  --> Product product
+}
+
+transaction setupDemo {
+}
+
+/** ------------------------------------------------------------------------------------------------------------------------------------
+  EVENTS DEFINITION:
+ ------------------------------------------------------------------------------------------------------------------------------------*/
+
+/**
+event SampleEvent {
+  --> SampleAsset asset
+  o String oldValue
+  o String newValue
+}
+*/

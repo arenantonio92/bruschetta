@@ -1,0 +1,388 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/** --------------------------------------------------------------------------------------------------------------------------------------------------------------
+ * SYSTEM PERMISSIONS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+rule EverybodyCanReadEverything {
+    description: "Allow all participants read access to all resources"
+    participant: "org.bn.evoo.Owner"
+    operation: READ
+    resource: "org.bn.evoo.*"
+    action: ALLOW
+}
+
+rule SystemACL {
+  description:  "Participants can read everything"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: READ
+  resource: "org.hyperledger.composer.system.**"
+  action: ALLOW
+}
+
+rule SystemACL2 {
+  description:  "Allow a participant to store transactions in the historian registry"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: CREATE
+  resource: "org.hyperledger.composer.system.HistorianRecord"
+  action: ALLOW
+}
+
+rule NetworkAdminUser {
+    description: "Grant business network administrators full access to user resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.bn.evoo.*"
+    action: ALLOW
+}
+
+rule setupDemo {
+    description: "Grant participants access to setupDemo transaction"
+    participant(m): "org.bn.evoo.Owner"
+    operation: CREATE
+    resource(v): "org.bn.evoo.*"
+    transaction(tx): "org.bn.evoo.setupDemo"
+    condition: (1==1)
+    action: ALLOW
+}
+
+rule NetworkAdminSystem {
+    description: "Grant business network administrators full access to system resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}
+
+rule UpdateAsset {
+  description: "Grant update permissions to participants"
+  participant: "org.bn.evoo.Owner"
+  operation: CREATE
+  resource: "org.hyperledger.composer.system.UpdateAsset"
+  action: ALLOW
+}
+
+/** --------------------------------------------------------------------------------------------------------------------------------------------------------------
+ * PARTICIPANTS CREATION
+--------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
+rule Participants {
+  description: "Deny creation and elimination of new participants to existing participants"
+  participant: "org.bn.evoo.Owner"
+  operation: CREATE, DELETE
+  resource: "org.bn.evoo.Owner"
+  action: DENY
+}
+
+rule OwnerAccess {
+  description: "Owner can modify only their own data"
+  participant(p): "org.bn.evoo.Owner"
+  operation: UPDATE
+  resource(r): "org.bn.evoo.Owner" 
+  condition: (p.getIdentifier() === r.getIdentifier())
+  action: ALLOW
+}
+
+/** --------------------------------------------------------------------------------------------------------------------------------------------------------------
+ * ALLOW PARTICIPANTS TO SUBMIT TRANSACTIONS
+-------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+rule newPlantation {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newPlantation"
+    action: ALLOW
+}
+
+rule newShop {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newShop"
+    action: ALLOW
+}
+
+rule newOrder {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newOrder"
+    action: ALLOW
+}
+
+rule newFarmingProcess {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newFarmingProcess"
+    action: ALLOW
+}
+
+rule startHarvestingProcess {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.startHarvestingProcess"
+    action: ALLOW
+}
+
+rule endHarvestingProcess {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.endHarvestingProcess"
+    action: ALLOW
+}
+
+rule newBatch {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newBatch"
+    action: ALLOW
+}
+
+rule newProductionProcess {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newProductionProcess"
+    action: ALLOW
+}
+
+rule newBatchShipment {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newBatchShipment"
+    action: ALLOW
+}
+
+rule newProductShipment {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newProductShipment"
+    action: ALLOW
+}
+
+rule newBasement {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newBasement"
+    action: ALLOW
+}
+
+rule newProduct {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newProduct"
+    action: ALLOW
+}
+
+rule newProductionProcessSensing {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newProductionProcessSensing"
+    action: ALLOW
+}
+
+rule newFarmingProcessSensing {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newFarmingProcessSensing"
+    action: ALLOW
+}
+
+rule newBatchShipmentSensing {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newBatchShipmentSensing"
+    action: ALLOW
+}
+
+rule newProductShipmentSensing {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newProductShipmentSensing"
+    action: ALLOW
+}
+
+rule newBasementSensing {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.newBasementSensing"
+    action: ALLOW
+}
+
+rule changeBatchOwnership {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.changeBatchOwnership"
+    action: ALLOW
+}
+
+rule changeProductOwnership {
+    description: "Allow transaction creation"
+    participant: "org.bn.evoo.Owner"
+    operation: CREATE
+    resource: "org.bn.evoo.changeProductOwnership"
+    action: ALLOW
+}
+
+/** --------------------------------------------------------------------------------------------------------------------------------------------------------------
+ * GRANT TO PARTICIPANTS COMPLETE ACCESS TO THEIR ASSETS
+-------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+rule Plantation {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.Plantation"
+    condition: (r.farmer.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule FarmingProcess {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.FarmingProcess"
+    condition: (r.plantation.farmer.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule Batch {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.Batch"
+    condition: (r.ownership.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule ProductionProcess {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.ProductionProcess"
+    condition: (r.maker.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule Basement {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.Basement"
+    condition: (r.maker.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule Product {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.Product"
+    condition: (r.ownership.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule BatchShipment {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.BatchShipment"
+    condition: (r.courier.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule ProductShipment {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.ProductShipment"
+    condition: (r.courier.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule Shop {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.Shop"
+    condition: (r.seller.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule Order {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.Order"
+    condition: (r.shop.seller.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule ProductionProcessSensing {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.ProductionProcessSensing"
+    condition: (r.process.maker.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule BasementSensing {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.BasementSensing"
+    condition: (r.basement.maker.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule FarmingProcessSensing {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.FarmingProcessSensing"
+    condition: (r.farming.plantation.farmer.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule BatchShipmentSensing {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.BatchShipmentSensing"
+    condition: (r.shipment.courier.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule ProductShipmentSensing {
+    description: "Allow modifications only to assets owner"
+    participant(p): "org.bn.evoo.Owner"
+    operation: ALL
+    resource(r): "org.bn.evoo.ProductShipmentSensing"
+    condition: (r.shipment.courier.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}

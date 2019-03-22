@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<title>Basic 88</title>
+<meta charset="UTF-8">
+<!--[if lt IE 9]><script src="scripts/html5shiv.js"></script><![endif]-->
+</head>
+<body>
+<div class="wrapper row1">
+  <header id="header" class="clear">
+    <div id="hgroup">
+      <h1><a href="#">EVOO 2.0</a></h1>
+      <h2>A traceability and certification system for extra virgin olive oil</h2>
+    </div>
+    <nav>
+      <ul>
+        <li><a routerLink="/home">HOME</a></li>
+        <li><a routerLink="/batch">BATCHES</a></li>
+        <li><a routerLink="/product">PRODUCTS</a></li>
+        <li class="last"><a routerLink="/personalArea">PERSONAL AREA</a></li>
+      </ul>
+    </nav>
+  </header>
+</div>
+<!-- content -->
+<div class="wrapper row2">
+  <div id="container" class="clear">
+    <!-- Slider -->
+    <section id="slider">
+      <img src="assets/images/main.jpg" height="360px" width="960px">
+    </section>
+    <!-- main content -->
+    <div id="homepage">
+      <!-- LOGIN -->
+      <section id="intro" class="last clear">
+          <article>
+            <div style="text-align: center">
+
+
+
+                <div *ngIf="currentUser" class="user-info">
+                    <router-outlet></router-outlet>
+                </div>
+
+
+
+                <section *ngIf="!authenticated">
+                    <img src="assets/images/GitHub.jpg" height="113px" width="322px" style="padding-top: 30px">
+                    <div class="content --center">
+                        <a href="http://localhost:3000/auth/github" class="button __login --github">
+                          Login With GitHub
+                        </a>
+                    </div>
+                </section>
+                <section *ngIf="authenticated && !loggedIn">
+                    <div style="text-align: center">
+                    <h2>Create a new account...</h2>
+
+
+                    <div class="login-page">
+                      <div class="form">
+                        <form class="login-form" form (ngSubmit)="onEmptySetup()" #batchForm="ngForm">
+                            <input type="text" [(ngModel)]="signUp.firstName" #firstName="ngModel" name="firstName" placeholder="Firstname"/>
+                            <input type="text" [(ngModel)]="signUp.surname" #firstName="ngModel" name="surname" placeholder="Surname"/>
+                            <input type="text" [(ngModel)]="signUp.email" #firstName="ngModel" name="email" placeholder="Email"/>
+                            <input type="text" [(ngModel)]="signUp.telephone" #firstName="ngModel" name="telephone" placeholder="Telephone"/>
+                            <input type="text" [(ngModel)]="signUp.address" #firstName="ngModel" name="address" placeholder="Address"/>
+                            <input type="text" [(ngModel)]="signUp.type" #firstName="ngModel" name="type" placeholder="Category"/>
+                            <section *ngIf="!signUpInProgress">
+                                <button>SIGN UP</button>
+                            </section>
+                            <section *ngIf="signUpInProgress">
+                                <h1>Sign up in progress...</h1>
+                            </section>
+                        </form>
+                      </div>
+                    </div>
+                    <h2>... or setup a demo</h2>
+                    <h2><br></h2>
+                  </div>
+                        <!-- Services -->
+                        <section id="services" class="clear">
+                            <article class="one_quarter">
+                              <figure>
+                                <figcaption><h2 class="one_quarter">I'M A FARMER</h2></figcaption>
+                                <img src="assets/images/farmer.jpg" width="225" height="180" alt="">
+                                <figcaption class="one_quarter">
+                                  <form class="one_quarter" form (ngSubmit)="setupFarmer()" #createForm="ngForm">
+                                      <button>SETUP DEMO</button>
+                                  </form>
+                                </figcaption>
+                              </figure>
+                            </article>
+                            <article class="one_quarter">
+                              <figure>
+                                <figcaption><h2 class="one_quarter" style="font-size=150px">I'M A MAKER</h2></figcaption>
+                                <img src="assets/images/maker.jpg" width="225" height="180" alt="">
+                                <figcaption>
+                                    <form class="one_quarter" form (ngSubmit)="setupMaker()" #createForm="ngForm">
+                                        <button>SETUP DEMO</button>
+                                    </form>
+                                  </figcaption>
+                              </figure>
+                            </article>
+                            <article class="one_quarter">
+                                <figure>
+                                  <figcaption><h2 class="one_quarter">I'M A COURIER</h2></figcaption>
+                                  <img src="assets/images/courier.jpg" width="225" height="180" alt="">
+                                  <figcaption>
+                                      <form  class="one_quarter" form (ngSubmit)="setupCourier()" #createForm="ngForm">
+                                          <button>SETUP DEMO</button>
+                                      </form>
+                                    </figcaption>
+                                </figure>
+                              </article>
+                            <article class="one_quarter lastbox">
+                              <figure>
+                                <figcaption><h2 class="one_quarter">I'M A SELLER</h2></figcaption>
+                                <img src="assets/images/seller.png" width="225" height="180" alt="">
+                                <figcaption>
+                                      <form  class="one_quarter" form (ngSubmit)="setupSeller()" #createForm="ngForm">
+                                          <button class="slide">SETUP DEMO</button>
+                                      </form>
+                                  </figcaption>
+                              </figure>
+                            </article>
+                          </section>
+                          <!-- / Services -->
+                  </section>
+            </div>
+          </article>
+        </section>
+    </div>
+    <!-- / content body -->
+  </div>
+</div>
+<!-- Footer -->
+<div class="wrapper row3">
+  <div id="footer" class="clear">
+    <!-- Section One -->
+    <section class="one_quarter lastbox">
+      <h2 class="title">Contacts:</h2>
+      <nav>
+        <ul>
+          <li><a href="#">+39 3337691687</a></li>
+          <li><a href="#">Strada Santa Croce 9</a></li>
+          <li><a href="#">alessiobianchini.it@gmail.com</a></li>
+          <li><a href="#">University of Pisa</a></li>
+        </ul>
+      </nav>
+    </section>
+    <!-- / Section -->
+  </div>
+</div>
+<!-- Copyright -->
+<div class="wrapper row4">
+  <footer id="copyright" class="clear">
+    <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">Domain Name</a></p>
+    <p class="fl_right">Template by <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+  </footer>
+</div>
+</body>
+</html>

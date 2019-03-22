@@ -1,0 +1,86 @@
+<!-- content -->
+<div class="wrapper row2">
+    <div id="container" class="clear">
+      <section id="slider"><a href="#"><img src="images/demo/960x360.gif" alt=""></a></section>
+      <!-- content body -->
+      <aside id="left_column">
+        <h2 class="title">Your assets:</h2>
+        <!-- FARMER MENU -->
+        <section *ngIf="farmer">
+            <nav>
+                <ul>
+                  <li><a routerLink="/plantation">Plantations</a></li>
+                  <li><a routerLink="/farming">Farming processes</a></li>
+                  <li class="last"><a routerLink="/myBatch">My batches</a></li>
+                </ul>
+              </nav>
+        </section>
+        <!-- MAKER MENU -->
+        <section *ngIf="maker">
+            <nav>
+                <ul>
+                  <li><a routerLink="/basement">Basements</a></li>
+                  <li><a routerLink="/productionProcess">Production processes</a></li>
+                  <li><a routerLink="/myBatch">My batches</a></li>
+                  <li><a routerLink="/myProduct">My products</a></li>
+                </ul>
+              </nav>
+        </section>
+        <!-- COURIER MENU -->
+        <section *ngIf="courier">
+            <nav>
+                <ul>
+                  <li><a routerLink="/batchShipment">Batches shipments</a></li>
+                  <li><a routerLink="/productShipment">Products shipment</a></li>
+                  <li><a routerLink="/myBatch">My batches</a></li>
+                  <li class="last"><a routerLink="/myProduct">My products</a></li>
+                </ul>
+              </nav>
+        </section>
+        <!-- SELLER MENU -->
+        <section *ngIf="seller">
+            <nav>
+                <ul>
+                  <li><a routerLink="/shop">Shops</a></li>
+                  <li><a routerLink="/order">Orders</a></li>
+                  <li class="last"><a routerLink="/myProduct">My products</a></li>
+                </ul>
+              </nav>
+        </section>
+        <h2 class="title">Your informations:</h2>
+        <section class="last">
+          <address style="font-size: medium; text-decoration-color: black">
+          ID: {{id}}<br>
+          Full Name: {{name}} {{surname}}<br>
+          Address: {{address}}<br>
+          <br>
+          <br>
+          Tel: {{telephone}}<br>
+          Email: <a href="#">{{email}}</a>
+          </address>
+        </section>
+        <!-- /section -->
+      </aside>
+      <!-- main content -->
+      <div id="content">
+        <article>
+          <h2>About your personal area:</h2>
+          <p>This is the place in which you can manage your assets and your personal informations.</p>
+          <p>Click links on the left to show your assets, to create or to modify existing ones.</p>
+          <footer class="more"></footer>
+        </article>
+        <article>
+            <h2>How to transfer assets ownership:</h2>
+            <p>You can transfer batches and products ownership to another party. To do that, click on "My batches" or "My products", select the candidate asset and click "Change ownership".</p>
+            <p>Attention: you can change ownership only of your own assets.</p>
+            <footer class="more"></footer>
+          </article>
+          <article>
+              <h2>Problems?</h2>
+              <p>Don't hesitate to contact us for support: </p>
+              <footer class="more">Email: <a href="#">alessiobianchini.it@gmail.com</a></footer>
+            </article>
+      </div>
+      <!-- / content body -->
+    </div>
+  </div>

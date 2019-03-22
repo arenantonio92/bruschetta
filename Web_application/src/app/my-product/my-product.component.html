@@ -1,0 +1,128 @@
+<!-- content -->
+<div class="wrapper row2">
+    <div id="container" class="clear">
+      <section id="slider"><a href="#"><img src="images/demo/960x360.gif" alt=""></a></section>
+      <!-- content body -->
+      <aside id="left_column">
+        <h2 class="title">Your assets:</h2>
+        <!-- FARMER MENU -->
+        <section *ngIf="farmer">
+            <nav>
+                <ul>
+                  <li><a routerLink="/plantation">Plantations</a></li>
+                  <li><a routerLink="/farming">Farming processes</a></li>
+                  <li class="last"><a routerLink="/myBatch">My batches</a></li>
+                </ul>
+              </nav>
+        </section>
+        <!-- MAKER MENU -->
+        <section *ngIf="maker">
+            <nav>
+                <ul>
+                    <li><a routerLink="/basement">Basements</a></li>
+                    <li><a routerLink="/productionProcess">Production processes</a></li>
+                    <li><a routerLink="/myBatch">My batches</a></li>
+                    <li class="last"><a routerLink="/myProduct">My products</a></li>
+                </ul>
+              </nav>
+        </section>
+        <!-- COURIER MENU -->
+        <section *ngIf="courier">
+                <nav>
+                    <ul>
+                      <li><a routerLink="/batchShipment">Batches shipments</a></li>
+                      <li><a routerLink="/productShipment">Products shipment</a></li>
+                      <li><a routerLink="/myBatch">My batches</a></li>
+                      <li class="last"><a routerLink="/myProduct">My products</a></li>
+                    </ul>
+                  </nav>
+            </section>
+            <!-- SELLER MENU -->
+            <section *ngIf="seller">
+                <nav>
+                    <ul>
+                      <li><a routerLink="/shop">Shops</a></li>
+                      <li><a routerLink="/order">Orders</a></li>
+                      <li class="last"><a routerLink="/myProduct">My products</a></li>
+                    </ul>
+                  </nav>
+            </section>
+        <h2 class="title">Your informations:</h2>
+        <section class="last">
+          <address style="font-size: medium; text-decoration-color: black">
+          ID: {{id}}<br>
+          Full Name: {{name}} {{surname}}<br>
+          Address: {{address}}<br>
+          <br>
+          <br>
+          Tel: {{telephone}}<br>
+          Email: <a href="#">{{email}}</a>
+          </address>
+        </section>
+        <!-- /section -->
+      </aside>
+      <!-- main content -->
+      <div id="content">
+        <article>
+          <h2>MY PRODUCTS:</h2>
+          <p></p>
+
+              <div class="table">
+                <div class="table-header">
+                  <div class="header__item">PRODUCT ID</div>
+                  <div class="header__item">BATCH ID</div>
+                  <div class="header__item">BASEMENT ID</div>
+                  <div class="header__item">CREATION DATE</div>
+                  <div class="header__item">OWNERSHIP</div>
+                </div>
+                <div class="table-content">	
+                    <div *ngFor="let product of products" class="table-row">		
+                        <div class="table-data">{{product.productId}}</div>
+                        <div class="table-data">{{product.batch}}</div>
+                        <div class="table-data">{{product.basement}}</div>
+                        <div class="table-data">{{product.creationDate}}</div>
+                        <div class="table-data">
+                            <form class="login-form" form (ngSubmit)="onChangeOwnership(product.productId)" #createForm="ngForm">
+                                <div class="box"><button class="btn1">Move</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>	
+              </div>
+            </article>
+                <article  align="center">
+                  <section *ngIf="changeOwn">
+                      <div class="login-page">
+                          <div class="form">
+                            <p style="color: black">CHANGING {{movingProduct}} OWNERSHIP:</p>
+                            <p></p>
+                            <form class="login-form" form (ngSubmit)="changeOwnership()" #batchForm="ngForm">
+                                <input type="text" [(ngModel)]="newOwnerId" #firstName="ngModel" name="newOwnerId" placeholder="New owner"/>
+                                <button>CHANGE OWNERSHIP</button>
+                            </form>
+                          </div>
+                        </div>
+                  </section>
+                  <section *ngIf="maker">
+                    <section *ngIf="!createNew"> 
+                        <form class="login-form" form (ngSubmit)="onCreateNew()" #createForm="ngForm">
+                            <div class="box"><button class="btn1">CREATE NEW</button></div>
+                        </form>
+                    </section>
+                    <section *ngIf="createNew">
+                        <div class="login-page">
+                            <div class="form">
+                              <form class="login-form" form (ngSubmit)="createNewProduct()" #batchForm="ngForm">
+                                  <input type="text" [(ngModel)]="batchId" #firstName="ngModel" name="batchId" placeholder="Batch identifier"/>
+                                  <input type="text" [(ngModel)]="basementId" #firstName="ngModel" name="basementId" placeholder="Basement identifier"/>
+                                  <button>ADD PRODUCT</button>
+                              </form>
+                            </div>
+                          </div>
+                    </section> 
+                  </section>  
+                </article>
+      </div>
+      <!-- / content body -->
+    </div>
+  </div>
